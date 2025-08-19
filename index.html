@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zungu Developer - Full Stack Developer Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #f8fafc;
+            --accent-color: #10b981;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Package Cards */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .package-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .package-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .package-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .package-card.featured .package-header {
+            background: var(--accent-color);
+        }
+
+        .package-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-period {
+            opacity: 0.9;
+        }
+
+        .package-body {
+            padding: 2rem;
+        }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .package-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .package-features i {
+            color: var(--accent-color);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--secondary-color);
+            padding: 3rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Quick Navigation Float */
+        .quick-nav-float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .quick-nav-btn {
+            background: var(--primary-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .quick-nav-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-dark);
+        }
+
+        .quick-nav-menu {
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            padding: 1rem;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s;
+        }
+
+        .quick-nav-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .quick-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .quick-nav-item:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .quick-nav-item i {
+            width: 20px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .quick-nav-item span {
+            font-weight: 500;
+        }
+
+        .quick-nav-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive Design */
+        
+        /* Large Desktop (1200px+) */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1400px;
+            }
+            
+            .hero h1 {
+                font-size: 4rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .packages-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Desktop (992px - 1199px) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .packages-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Tablet (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+            
+            .hero {
+                padding: 6rem 1.5rem 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .packages-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        /* Mobile Large (576px - 767px) */
+        @media (min-width: 576px) and (max-width: 767px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 6rem 1rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .services-grid,
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .quick-nav-menu {
+                left: -10px;
+                min-width: 180px;
+            }
+            
+            .whatsapp-float {
+                bottom: 90px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            .quick-nav-float {
+                bottom: 90px;
+                left: 15px;
+            }
+            
+            .quick-nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Client Portal Responsive */
+        @media (max-width: 768px) {
+            #dashboardSection .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #dashboardSection div[style*="grid-template-columns: 1fr 1fr"] {
+                display: block !important;
+            }
+            
+            #dashboardSection div[style*="grid-template-columns: 1fr 1fr"] > div {
+                margin-bottom: 2rem;
+            }
+            
+            #dashboardSection table {
+                font-size: 0.9rem;
+            }
+            
+            #dashboardSection th,
+            #dashboardSection td {
+                padding: 0.5rem !important;
+            }
+        }
+
+        /* Mobile Small (up to 575px) */
+        @media (max-width: 575px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                padding: 5rem 1rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+                margin-bottom: 0.75rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .services-grid,
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .service-card,
+            .package-card {
+                padding: 1.5rem;
+            }
+            
+            .service-icon {
+                font-size: 2.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .contact-form {
+                padding: 1rem;
+                margin: 1.5rem 0;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 2.5rem 1rem;
+            }
+            
+            .quick-nav-menu {
+                left: -20px;
+                min-width: 160px;
+                bottom: 60px;
+            }
+            
+            .quick-nav-item {
+                padding: 0.625rem;
+                font-size: 0.9rem;
+            }
+            
+            .whatsapp-float {
+                bottom: 80px;
+                right: 10px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            .quick-nav-float {
+                bottom: 80px;
+                left: 10px;
+            }
+            
+            .quick-nav-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            /* About section responsive grid */
+            #about .container > div:first-of-type {
+                display: block !important;
+                gap: 2rem !important;
+            }
+            
+            #about .container > div:first-of-type > div:first-child {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+            
+            #about .container > div:first-of-type > div:first-child > div {
+                width: 150px !important;
+                height: 150px !important;
+                font-size: 3rem !important;
+            }
+        }
+
+        /* Extra Small Mobile (up to 375px) */
+        @media (max-width: 375px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .service-card,
+            .package-card {
+                padding: 1rem;
+            }
+            
+            .contact-form {
+                padding: 0.75rem;
+            }
+            
+            .btn {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.9rem;
+            }
+            
+            .package-price {
+                font-size: 2rem;
+            }
+            
+            .quick-nav-menu {
+                min-width: 140px;
+                left: -30px;
+            }
+        }
+
+        /* Landscape Mobile Orientation */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                padding: 3rem 1rem 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 2rem 1rem;
+            }
+            
+            .whatsapp-float,
+            .quick-nav-float {
+                bottom: 10px;
+            }
+        }
+
+        /* High DPI Displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .service-icon,
+            .package-header {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+
+        /* Touch Device Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .btn:hover,
+            .service-card:hover,
+            .package-card:hover {
+                transform: none;
+            }
+            
+            .btn:active {
+                transform: scale(0.98);
+            }
+            
+            .nav-link:hover {
+                color: var(--text-dark);
+            }
+            
+            .quick-nav-item:hover {
+                background: var(--secondary-color);
+            }
+        }
+
+        /* Hidden sections for navigation */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        #home.active {
+            display: block;
+        }
+
+        /* Toggle Button Styles */
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-btn.active {
+            background: var(--primary-color);
+            color: var(--white);
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .toggle-btn:hover:not(.active) {
+            color: var(--primary-color);
+        }
+
+        /* Service sections */
+        .service-section {
+            display: none;
+        }
+
+        .service-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                Zungu Developer
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" class="nav-link" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('about')">About</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('skills')">Skills</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('services-packages')">Services</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('portfolio')">Portfolio</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('contact')">Contact</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('client-portal')">Client Portal</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <div id="home" class="page-section active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <h1>Full Stack Developer</h1>
+                <p>Passionate about creating innovative web applications, trading systems, and custom software solutions. Based in Durban, South Africa.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary" onclick="showSection('portfolio')">
+                        <i class="fas fa-briefcase"></i> View My Work
+                    </a>
+                    <a href="#" class="btn btn-secondary" onclick="showSection('contact')">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Overview -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">What I Do</h2>
+                <p class="section-subtitle">Specialized in full-stack development with expertise across multiple technologies</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Full-stack web applications using modern frameworks like React, Node.js, PHP, and Python</p>
+                        <a href="#" class="btn btn-primary" onclick="showSection('skills')">View Skills</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Trading Systems</h3>
+                        <p>MT5 Expert Advisors, algorithmic trading bots, and financial technology solutions</p>
+                        <a href="#" class="btn btn-primary" onclick="showSection('portfolio')">See Projects</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Backend Development</h3>
+                        <p>Database design, API development, server management, and system architecture</p>
+                        <a href="#" class="btn btn-primary" onclick="showSection('about')">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="page-section">
+        <section class="section" style="margin-top: 100px;">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Passionate developer with a focus on creating impactful solutions</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 3rem;">
+                    <div>
+                        <div style="width: 200px; height: 200px; background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; color: white; font-size: 4rem;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Hello, I'm Zungu</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-light); margin-bottom: 1.5rem;">
+                            A passionate full-stack developer based in Durban, South Africa. I specialize in creating custom web applications, 
+                            trading systems, and business solutions that help companies streamline their operations and achieve their goals.
+                        </p>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-light); margin-bottom: 2rem;">
+                            With expertise in modern web technologies and a keen eye for user experience, I transform ideas into 
+                            functional, scalable applications that make a real difference.
+                        </p>
+                        <a href="#" class="btn btn-primary" onclick="showSection('contact')">
+                            <i class="fas fa-coffee"></i> Let's Work Together
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Experience Timeline -->
+                <div style="margin-top: 4rem;">
+                    <h3 class="section-title" style="font-size: 2rem;">Experience & Education</h3>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3>Freelance Developer</h3>
+                            <p style="color: var(--primary-color); font-weight: 600;">2022 - Present</p>
+                            <p>Developing custom web applications, trading systems, and business solutions for clients across South Africa.</p>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Self-Taught Developer</h3>
+                            <p style="color: var(--primary-color); font-weight: 600;">2023 - Present</p>
+                            <p>Intensive self-study in web development, algorithms, and software engineering principles through online courses and projects.</p>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Trading Systems Specialist</h3>
+                            <p style="color: var(--primary-color); font-weight: 600;">2023 - Present</p>
+                            <p>Specialized in developing MT5 Expert Advisors and automated trading solutions for forex and cryptocurrency markets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Skills Section -->
+    <div id="skills" class="page-section">
+        <section class="section" style="margin-top: 100px;">
+            <div class="container">
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-subtitle">Technologies and tools I use to bring ideas to life</p>
+                
+                <!-- Frontend Skills -->
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 2rem; text-align: center; color: var(--text-dark);">Frontend Development</h3>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #61dafb;">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <h3>React & Next.js</h3>
+                            <p>Modern React applications with hooks, context, and Next.js for server-side rendering and optimal performance.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #61dafb; height: 100%; width: 85%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Advanced - 85%</small>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #f7df1e;">
+                                <i class="fab fa-js-square"></i>
+                            </div>
+                            <h3>JavaScript & TypeScript</h3>
+                            <p>ES6+, async/await, DOM manipulation, and TypeScript for type-safe, scalable applications.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #f7df1e; height: 100%; width: 90%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Expert - 90%</small>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #38b2ac;">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <h3>CSS & Tailwind</h3>
+                            <p>Responsive design, CSS Grid, Flexbox, animations, and utility-first styling with Tailwind CSS.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #38b2ac; height: 100%; width: 88%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Advanced - 88%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend Skills -->
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 2rem; text-align: center; color: var(--text-dark);">Backend Development</h3>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #339933;">
+                                <i class="fab fa-node-js"></i>
+                            </div>
+                            <h3>Node.js & Express</h3>
+                            <p>RESTful APIs, middleware, authentication, real-time applications with Socket.io, and microservices architecture.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #339933; height: 100%; width: 82%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Advanced - 82%</small>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #777bb4;">
+                                <i class="fab fa-php"></i>
+                            </div>
+                            <h3>PHP & Laravel</h3>
+                            <p>Object-oriented PHP, Laravel framework, Eloquent ORM, and custom CMS development.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #777bb4; height: 100%; width: 80%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Advanced - 80%</small>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #3776ab;">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <h3>Python & Flask</h3>
+                            <p>Web applications with Flask, data processing, automation scripts, and API integrations.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #3776ab; height: 100%; width: 75%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Intermediate - 75%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database & Tools -->
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 2rem; text-align: center; color: var(--text-dark);">Database & Tools</h3>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #4479a1;">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3>MySQL & MongoDB</h3>
+                            <p>Database design, optimization, complex queries, indexing, and NoSQL document databases.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #4479a1; height: 100%; width: 85%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Advanced - 85%</small>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #f05032;">
+                                <i class="fab fa-git-alt"></i>
+                            </div>
+                            <h3>Git & Version Control</h3>
+                            <p>Git workflows, branching strategies, GitHub/GitLab, code reviews, and collaborative development.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #f05032; height: 100%; width: 88%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Advanced - 88%</small>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #326ce5;">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h3>Cloud & DevOps</h3>
+                            <p>AWS, Digital Ocean, Docker containers, CI/CD pipelines, and server management.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #326ce5; height: 100%; width: 70%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Intermediate - 70%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Specialized Skills -->
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 2rem; text-align: center; color: var(--text-dark);">Specialized Skills</h3>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #ff6b35;">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Trading Systems (MQL5)</h3>
+                            <p>MetaTrader 5 Expert Advisors, algorithmic trading strategies, backtesting, and risk management systems.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #ff6b35; height: 100%; width: 90%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Expert - 90%</small>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #10b981;">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>Mobile Development</h3>
+                            <p>Progressive Web Apps (PWA), responsive design, and cross-platform mobile solutions.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #10b981; height: 100%; width: 75%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Intermediate - 75%</small>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #8b5cf6;">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Security & Testing</h3>
+                            <p>Web security best practices, authentication systems, unit testing, and code quality assurance.</p>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden;">
+                                    <div style="background: #8b5cf6; height: 100%; width: 78%; border-radius: 10px;"></div>
+                                </div>
+                                <small style="color: var(--text-light);">Advanced - 78%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Portfolio Section -->
+    <div id="portfolio" class="page-section">
+        <section class="section" style="margin-top: 100px;">
+            <div class="container">
+                <h2 class="section-title">Recent Projects</h2>
+                <p class="section-subtitle">Successful implementations for South African businesses</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>Retail Inventory System</h3>
+                        <p>Complete inventory management solution for a chain of electronics stores in Johannesburg. Features real-time stock tracking, automated reordering, and comprehensive reporting.</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">PHP</span>
+                            <span style="background: var(--primary-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-left: 0.5rem;">MySQL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <h3>Private School Portal</h3>
+                        <p>Student management system for a private school in Pretoria. Includes grade tracking, attendance management, parent communication, and assignment submissions.</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Python</span>
+                            <span style="background: var(--primary-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-left: 0.5rem;">Flask</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>Forex Trading Bot</h3>
+                        <p>Custom MT5 Expert Advisor for a forex trading firm. Automated trading strategies with risk management, backtesting capabilities, and real-time performance monitoring.</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">MQL5</span>
+                            <span style="background: var(--primary-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-left: 0.5rem;">MT5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-headphones"></i>
+                        </div>
+                        <h3>IT Support Ticketing</h3>
+                        <p>Help desk system for a Cape Town IT services company. Features ticket management, customer communication, SLA tracking, and performance analytics.</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">PHP</span>
+                            <span style="background: var(--primary-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-left: 0.5rem;">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <div style="margin-top: 4rem;">
+                    <h3 class="section-title" style="font-size: 2rem;">Client Testimonials</h3>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <p style="font-style: italic; margin-bottom: 1rem;">"The inventory system has transformed our business operations. We've reduced stock-outs by 80% and improved our ordering efficiency significantly."</p>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 50px; height: 50px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">JM</div>
+                                <div>
+                                    <strong>John Mthembu</strong><br>
+                                    <small>Electronics Store Owner</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <p style="font-style: italic; margin-bottom: 1rem;">"Excellent service and professional approach. The student portal has streamlined our administrative processes and improved parent communication."</p>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">SP</div>
+                                <div>
+                                    <strong>Sarah Patel</strong><br>
+                                    <small>School Principal</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <p style="font-style: italic; margin-bottom: 1rem;">"The trading bot has been performing consistently well. Great attention to detail and ongoing support. Highly recommended!"</p>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 50px; height: 50px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">MK</div>
+                                <div>
+                                    <strong>Michael Kruger</strong><br>
+                                    <small>Forex Trader</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Section -->
+    <div id="services-packages" class="page-section">
+        <section class="section" style="margin-top: 100px;">
+            <div class="container">
+                <h2 class="section-title">Service Packages</h2>
+                <p class="section-subtitle">Professional web development solutions tailored to your business needs</p>
+                
+                <!-- Toggle Buttons -->
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem;">
+                    <button class="toggle-btn active" id="monthlyBtn" onclick="toggleServiceType('monthly')">
+                        <i class="fas fa-calendar-alt"></i> Monthly Packages
+                    </button>
+                    <button class="toggle-btn" id="oneoffBtn" onclick="toggleServiceType('oneoff')">
+                        <i class="fas fa-rocket"></i> One-Off Services
+                    </button>
+                </div>
+
+                <!-- Monthly Services -->
+                <div id="monthlyServices" class="service-section active">
+                    <div class="packages-grid">
+                        <div class="package-card">
+                            <div class="package-header">
+                                <div class="package-name">Starter Plan</div>
+                                <div class="package-price">R2,500</div>
+                                <div class="package-period">per month</div>
+                            </div>
+                            <div class="package-body">
+                                <p style="text-align: center; margin-bottom: 1.5rem; color: var(--text-light);">Perfect for new businesses and personal brands</p>
+                                <ul class="package-features">
+                                    <li><i class="fas fa-check"></i> 5 custom web pages</li>
+                                    <li><i class="fas fa-check"></i> Mobile-responsive layout</li>
+                                    <li><i class="fas fa-check"></i> Basic SEO setup</li>
+                                    <li><i class="fas fa-check"></i> Free hosting included</li>
+                                    <li><i class="fas fa-check"></i> WhatsApp chat integration</li>
+                                    <li><i class="fas fa-check"></i> 2 design revisions</li>
+                                    <li><i class="fas fa-clock"></i> 7-10 business days delivery</li>
+                                </ul>
+                                <a href="#" class="btn btn-primary" onclick="showSection('contact')" style="width: 100%; justify-content: center;">
+                                    Get Started
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="package-card featured">
+                            <div class="package-header">
+                                <div class="package-name">Professional Plan</div>
+                                <div class="package-price">R4,500</div>
+                                <div class="package-period">per month</div>
+                            </div>
+                            <div class="package-body">
+                                <p style="text-align: center; margin-bottom: 1.5rem; color: var(--text-light);">Ideal for growing brands and service providers</p>
+                                <ul class="package-features">
+                                    <li><i class="fas fa-check"></i> 10 custom web pages</li>
+                                    <li><i class="fas fa-check"></i> Full custom branding</li>
+                                    <li><i class="fas fa-check"></i> eCommerce functionality</li>
+                                    <li><i class="fas fa-check"></i> Google Analytics integration</li>
+                                    <li><i class="fas fa-check"></i> Social media linking</li>
+                                    <li><i class="fas fa-check"></i> 5 design revisions</li>
+                                    <li><i class="fas fa-clock"></i> 10-14 business days delivery</li>
+                                </ul>
+                                <a href="#" class="btn btn-primary" onclick="showSection('contact')" style="width: 100%; justify-content: center;">
+                                    Get Started
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="package-card">
+                            <div class="package-header">
+                                <div class="package-name">Enterprise Plan</div>
+                                <div class="package-price">R8,500</div>
+                                <div class="package-period">per month</div>
+                            </div>
+                            <div class="package-body">
+                                <p style="text-align: center; margin-bottom: 1.5rem; color: var(--text-light);">For established businesses requiring advanced systems</p>
+                                <ul class="package-features">
+                                    <li><i class="fas fa-check"></i> Unlimited pages</li>
+                                    <li><i class="fas fa-check"></i> Full-stack development</li>
+                                    <li><i class="fas fa-check"></i> API integrations</li>
+                                    <li><i class="fas fa-check"></i> Dedicated project manager</li>
+                                    <li><i class="fas fa-check"></i> Performance optimization</li>
+                                    <li><i class="fas fa-check"></i> Custom UX & database</li>
+                                    <li><i class="fas fa-clock"></i> 14-21 business days delivery</li>
+                                </ul>
+                                <a href="#" class="btn btn-primary" onclick="showSection('contact')" style="width: 100%; justify-content: center;">
+                                    Get Started
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Support Add-ons -->
+                    <div style="margin-top: 4rem;">
+                        <h3 class="section-title" style="font-size: 2rem;">Hosting & Support Add-ons</h3>
+                        <div class="services-grid">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h3>Basic Maintenance</h3>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;">R1,200/month</div>
+                                <p>Uptime checks, security updates, monthly bug fixes</p>
+                            </div>
+                            
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <h3>Premium Support</h3>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;">R2,500/month</div>
+                                <p>Weekly SEO reports, content updates, performance checks</p>
+                            </div>
+                            
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h3>Enterprise Support</h3>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;">R5,000/month</div>
+                                <p>24/7 support, custom dev hours, analytics, real-time monitoring</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- One-Off Services -->
+                <div id="oneoffServices" class="service-section">
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3>Business Website</h3>
+                            <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;">R8,000 - R25,000</div>
+                            <p>Professional business website with up to 10 pages, contact forms, and mobile optimization. Perfect for service businesses and consultants.</p>
+                            <ul style="list-style: none; margin: 1rem 0; padding: 0;">
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Responsive design</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> SEO optimization</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Contact forms</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> 1 year hosting</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" onclick="showSection('contact')">Get Quote</a>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <h3>E-commerce Store</h3>
+                            <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;">R15,000 - R45,000</div>
+                            <p>Complete online store with payment processing, inventory management, and order tracking. Ready to start selling online immediately.</p>
+                            <ul style="list-style: none; margin: 1rem 0; padding: 0;">
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Payment gateway integration</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Inventory management</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Order tracking</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Admin dashboard</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" onclick="showSection('contact')">Get Quote</a>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>Trading Bot Development</h3>
+                            <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;">R20,000 - R80,000</div>
+                            <p>Custom MT5 Expert Advisors and algorithmic trading systems with backtesting, risk management, and performance monitoring.</p>
+                            <ul style="list-style: none; margin: 1rem 0; padding: 0;">
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Custom trading strategy</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Risk management</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Backtesting & optimization</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Performance monitoring</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" onclick="showSection('contact')">Get Quote</a>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3>Custom Web Application</h3>
+                            <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;">R25,000 - R100,000</div>
+                            <p>Tailored web applications for specific business needs including inventory systems, CRM, booking systems, and management portals.</p>
+                            <ul style="list-style: none; margin: 1rem 0; padding: 0;">
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Custom functionality</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Database design</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> User management</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> API integrations</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" onclick="showSection('contact')">Get Quote</a>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>Mobile App Development</h3>
+                            <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;">R30,000 - R120,000</div>
+                            <p>Cross-platform mobile applications using React Native or Progressive Web Apps for iOS and Android deployment.</p>
+                            <ul style="list-style: none; margin: 1rem 0; padding: 0;">
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Cross-platform compatibility</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> App store deployment</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Push notifications</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Offline functionality</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" onclick="showSection('contact')">Get Quote</a>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>SEO & Digital Marketing</h3>
+                            <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0;">R5,000 - R15,000</div>
+                            <p>Complete SEO audit, optimization, and digital marketing setup to improve your online visibility and search rankings.</p>
+                            <ul style="list-style: none; margin: 1rem 0; padding: 0;">
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> SEO audit & optimization</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Google Analytics setup</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Social media integration</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check" style="color: var(--accent-color); margin-right: 0.5rem;"></i> Performance monitoring</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" onclick="showSection('contact')">Get Quote</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Client Portal Section -->
+    <div id="client-portal" class="page-section">
+        <section class="section" style="margin-top: 100px;">
+            <div class="container">
+                <h2 class="section-title">Client Portal</h2>
+                <p class="section-subtitle">Access your project dashboard, track progress, and manage your account</p>
+                
+                <!-- Login Form -->
+                <div id="loginSection" class="contact-form" style="max-width: 500px; margin: 0 auto;">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="width: 80px; height: 80px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 2rem;">
+                            <i class="fas fa-user-lock"></i>
+                        </div>
+                        <h3 style="margin-bottom: 0.5rem;">Welcome Back</h3>
+                        <p style="color: var(--text-light);">Sign in to access your project dashboard</p>
+                    </div>
+                    
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" name="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                                <input type="checkbox" style="margin: 0;"> Remember me
+                            </label>
+                            <a href="#" style="color: var(--primary-color); text-decoration: none; font-size: 0.9rem;" onclick="showForgotPassword()">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </button>
+                    </form>
+                    
+                    <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                        <p style="color: var(--text-light); margin-bottom: 1rem;">Don't have an account yet?</p>
+                        <a href="#" class="btn btn-secondary" onclick="showSection('contact')" style="display: inline-flex;">
+                            <i class="fas fa-user-plus"></i> Request Access
+                        </a>
+                    </div>
+                    
+                    <!-- Demo Login Info -->
+                    <div style="background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px; padding: 1rem; margin-top: 2rem;">
+                        <h4 style="color: #0369a1; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-info-circle"></i> Demo Access
+                        </h4>
+                        <p style="font-size: 0.9rem; color: #0369a1; margin-bottom: 0.5rem;">Try the client portal with demo credentials:</p>
+                        <p style="font-size: 0.9rem; color: #0369a1; margin: 0;"><strong>Email:</strong> demo@client.com</p>
+                        <p style="font-size: 0.9rem; color: #0369a1; margin: 0;"><strong>Password:</strong> demo123</p>
+                    </div>
+                </div>
+
+                <!-- Dashboard (Hidden by default) -->
+                <div id="dashboardSection" style="display: none;">
+                    <!-- Dashboard Header -->
+                    <div style="background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem;">Welcome back, John!</h3>
+                                <p style="opacity: 0.9; margin: 0;">Your E-commerce Store project is 75% complete</p>
+                            </div>
+                            <button class="btn btn-secondary" onclick="logout()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3);">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Stats -->
+                    <div class="services-grid" style="margin-bottom: 3rem;">
+                        <div class="service-card">
+                            <div class="service-icon" style="color: var(--accent-color);">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <h3>Project Progress</h3>
+                            <div style="font-size: 2rem; font-weight: bold; color: var(--accent-color); margin: 0.5rem 0;">75%</div>
+                            <p>Development milestone reached</p>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon" style="color: var(--primary-color);">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <h3>Next Milestone</h3>
+                            <div style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin: 0.5rem 0;">Dec 15, 2024</div>
+                            <p>Testing & deployment phase</p>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon" style="color: #f59e0b;">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <h3>Outstanding Balance</h3>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b; margin: 0.5rem 0;">R12,500</div>
+                            <p>Final payment due on completion</p>
+                        </div>
+                    </div>
+
+                    <!-- Project Timeline -->
+                    <div style="background: var(--secondary-color); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-timeline"></i> Project Timeline
+                        </h3>
+                        
+                        <div style="position: relative;">
+                            <!-- Timeline Item 1 - Completed -->
+                            <div style="display: flex; gap: 1rem; margin-bottom: 2rem; position: relative;">
+                                <div style="width: 40px; height: 40px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; z-index: 2;">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <h4 style="margin-bottom: 0.5rem; color: var(--text-dark);">Project Planning & Design</h4>
+                                    <p style="color: var(--text-light); margin-bottom: 0.5rem;">Wireframes, mockups, and technical specifications completed</p>
+                                    <small style="color: var(--accent-color); font-weight: 600;">✓ Completed - Nov 20, 2024</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Timeline Item 2 - In Progress -->
+                            <div style="display: flex; gap: 1rem; margin-bottom: 2rem; position: relative;">
+                                <div style="width: 40px; height: 40px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; z-index: 2;">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <h4 style="margin-bottom: 0.5rem; color: var(--text-dark);">Development Phase</h4>
+                                    <p style="color: var(--text-light); margin-bottom: 0.5rem;">Frontend and backend development in progress</p>
+                                    <div style="background: #e5e7eb; border-radius: 10px; height: 8px; overflow: hidden; margin-bottom: 0.5rem;">
+                                        <div style="background: var(--primary-color); height: 100%; width: 75%; border-radius: 10px;"></div>
+                                    </div>
+                                    <small style="color: var(--primary-color); font-weight: 600;">🔄 In Progress - 75% Complete</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Timeline Item 3 - Upcoming -->
+                            <div style="display: flex; gap: 1rem; margin-bottom: 2rem; position: relative;">
+                                <div style="width: 40px; height: 40px; background: var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-light); flex-shrink: 0; z-index: 2;">
+                                    <i class="fas fa-vial"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <h4 style="margin-bottom: 0.5rem; color: var(--text-light);">Testing & Quality Assurance</h4>
+                                    <p style="color: var(--text-light); margin-bottom: 0.5rem;">Comprehensive testing and bug fixes</p>
+                                    <small style="color: var(--text-light); font-weight: 600;">⏳ Scheduled - Dec 15, 2024</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Timeline Item 4 - Upcoming -->
+                            <div style="display: flex; gap: 1rem; position: relative;">
+                                <div style="width: 40px; height: 40px; background: var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-light); flex-shrink: 0; z-index: 2;">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <h4 style="margin-bottom: 0.5rem; color: var(--text-light);">Launch & Deployment</h4>
+                                    <p style="color: var(--text-light); margin-bottom: 0.5rem;">Final deployment and go-live</p>
+                                    <small style="color: var(--text-light); font-weight: 600;">⏳ Scheduled - Dec 22, 2024</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Timeline Line -->
+                            <div style="position: absolute; left: 19px; top: 40px; bottom: 40px; width: 2px; background: var(--border-color); z-index: 1;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions & Files -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                        <!-- Quick Actions -->
+                        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                            <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-bolt"></i> Quick Actions
+                            </h3>
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                <button class="btn btn-primary" onclick="alert('Message sent to developer!')">
+                                    <i class="fas fa-comment"></i> Send Message
+                                </button>
+                                <button class="btn btn-secondary" onclick="alert('Meeting request submitted!')">
+                                    <i class="fas fa-video"></i> Schedule Meeting
+                                </button>
+                                <button class="btn btn-secondary" onclick="alert('Change request form opened!')">
+                                    <i class="fas fa-edit"></i> Request Changes
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Project Files -->
+                        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                            <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-folder"></i> Project Files
+                            </h3>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: var(--secondary-color); border-radius: 8px;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <i class="fas fa-file-image" style="color: var(--primary-color);"></i>
+                                        <span>Design Mockups.zip</span>
+                                    </div>
+                                    <button style="background: none; border: none; color: var(--primary-color); cursor: pointer;" onclick="alert('File downloaded!')">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: var(--secondary-color); border-radius: 8px;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <i class="fas fa-file-pdf" style="color: #dc2626;"></i>
+                                        <span>Project Proposal.pdf</span>
+                                    </div>
+                                    <button style="background: none; border: none; color: var(--primary-color); cursor: pointer;" onclick="alert('File downloaded!')">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: var(--secondary-color); border-radius: 8px;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <i class="fas fa-file-code" style="color: var(--accent-color);"></i>
+                                        <span>Technical Specs.docx</span>
+                                    </div>
+                                    <button style="background: none; border: none; color: var(--primary-color); cursor: pointer;" onclick="alert('File downloaded!')">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Communications -->
+                    <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-comments"></i> Recent Communications
+                        </h3>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <!-- Message 1 -->
+                            <div style="display: flex; gap: 1rem; padding: 1rem; background: var(--secondary-color); border-radius: 8px;">
+                                <div style="width: 40px; height: 40px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0;">
+                                    Z
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                        <strong>Zungu Developer</strong>
+                                        <small style="color: var(--text-light);">2 hours ago</small>
+                                    </div>
+                                    <p style="margin: 0; color: var(--text-dark);">The payment gateway integration is complete and ready for testing. I've sent you the test credentials via email.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Message 2 -->
+                            <div style="display: flex; gap: 1rem; padding: 1rem; background: #f0f9ff; border-radius: 8px;">
+                                <div style="width: 40px; height: 40px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0;">
+                                    J
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                        <strong>You</strong>
+                                        <small style="color: var(--text-light);">1 day ago</small>
+                                    </div>
+                                    <p style="margin: 0; color: var(--text-dark);">Thanks for the update! Could we also add a wishlist feature to the store? Let me know if that's possible.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Message 3 -->
+                            <div style="display: flex; gap: 1rem; padding: 1rem; background: var(--secondary-color); border-radius: 8px;">
+                                <div style="width: 40px; height: 40px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0;">
+                                    Z
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                        <strong>Zungu Developer</strong>
+                                        <small style="color: var(--text-light);">2 days ago</small>
+                                    </div>
+                                    <p style="margin: 0; color: var(--text-dark);">Absolutely! The wishlist feature can be added. I'll include it in the next development sprint and update the timeline accordingly.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 1.5rem;">
+                            <button class="btn btn-primary" onclick="alert('Message composer opened!')">
+                                <i class="fas fa-plus"></i> Send New Message
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Invoice Summary -->
+                    <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                        <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-receipt"></i> Invoice Summary
+                        </h3>
+                        
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background: var(--secondary-color);">
+                                        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color);">Invoice #</th>
+                                        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color);">Description</th>
+                                        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color);">Amount</th>
+                                        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color);">Status</th>
+                                        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color);">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">#INV-001</td>
+                                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Project Deposit (50%)</td>
+                                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">R12,500</td>
+                                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
+                                            <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">Paid</span>
+                                        </td>
+                                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
+                                            <button style="background: none; border: none; color: var(--primary-color); cursor: pointer;" onclick="alert('Invoice downloaded!')">
+                                                <i class="fas fa-download"></i> Download
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">#INV-002</td>
+                                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Final Payment (50%)</td>
+                                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">R12,500</td>
+                                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
+                                            <span style="background: #f59e0b; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">Pending</span>
+                                        </td>
+                                        <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
+                                            <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="alert('Redirecting to payment gateway...')">
+                                                <i class="fas fa-credit-card"></i> Pay Now
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forgot Password Section (Hidden by default) -->
+                <div id="forgotPasswordSection" style="display: none; max-width: 500px; margin: 0 auto;" class="contact-form">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="width: 80px; height: 80px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 2rem;">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h3 style="margin-bottom: 0.5rem;">Reset Password</h3>
+                        <p style="color: var(--text-light);">Enter your email to receive reset instructions</p>
+                    </div>
+                    
+                    <form id="forgotPasswordForm">
+                        <div class="form-group">
+                            <label for="resetEmail">Email Address</label>
+                            <input type="email" id="resetEmail" name="email" placeholder="your@email.com" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-paper-plane"></i> Send Reset Link
+                        </button>
+                    </form>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="#" style="color: var(--primary-color); text-decoration: none;" onclick="showLoginForm()">
+                            <i class="fas fa-arrow-left"></i> Back to Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="page-section">
+        <section class="section" style="margin-top: 100px;">
+            <div class="container">
+                <h2 class="section-title">Let's Work Together</h2>
+                <p class="section-subtitle">Have a project in mind? I'd love to hear about it and discuss how we can bring your ideas to life.</p>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company Name</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="service">Project Type *</label>
+                                <select id="service" name="service" required>
+                                    <option value="">What kind of project?</option>
+                                    <option value="web-app">Web Application</option>
+                                    <option value="website">Business Website</option>
+                                    <option value="ecommerce">E-commerce Platform</option>
+                                    <option value="trading-bot">Trading Bot/System</option>
+                                    <option value="inventory">Inventory Management</option>
+                                    <option value="student-portal">Educational Portal</option>
+                                    <option value="api">API Development</option>
+                                    <option value="consultation">Consultation</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget">Project Budget (ZAR)</label>
+                                <select id="budget" name="budget">
+                                    <option value="">Select budget range...</option>
+                                    <option value="under-5k">Under R5,000</option>
+                                    <option value="5k-15k">R5,000 - R15,000</option>
+                                    <option value="15k-30k">R15,000 - R30,000</option>
+                                    <option value="30k-50k">R30,000 - R50,000</option>
+                                    <option value="over-50k">Over R50,000</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Project Details *</label>
+                            <textarea id="message" name="message" placeholder="Please describe your project requirements, timeline, and any specific features you need..." required></textarea>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary" style="padding: 1rem 3rem;">
+                                <i class="fas fa-paper-plane"></i> Send Inquiry
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div style="margin-top: 3rem; text-align: center;">
+                    <h3 style="margin-bottom: 1rem;">Prefer to call or message directly?</h3>
+                    <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                        <a href="https://wa.me/27604405957" class="btn btn-primary">
+                            <i class="fab fa-whatsapp"></i> WhatsApp Chat
+                        </a>
+                        <div> <style>.btn-secondary { background-color: #6c757d; color: white; padding: 0.5rem 1rem; border: none; border-radius: 0.25rem; text-decoration: none; font-size: 1rem; } .btn-secondary:hover { background-color: #5a6268; }</style></div>
+                        <a href="tel:+27604405957" class="btn btn-secondary">
+                            <i class="fas fa-phone"></i> Call Now
+                        </a>
+                        <a href="mailto:zungu3270@gmail.com" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i> Email Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Zungu Developer</h3>
+                <p>Full-stack developer passionate about creating innovative web applications and custom software solutions. Based in Durban, South Africa.</p>
+                <div class="social-links">
+                    <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://wa.me/27604405957" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Expertise</h3>
+                <a href="#" onclick="showSection('skills')">Web Development</a>
+                <a href="#" onclick="showSection('portfolio')">Trading Systems</a>
+                <a href="#" onclick="showSection('about')">Full-Stack Solutions</a>
+                <a href="#" onclick="showSection('portfolio')">Custom Applications</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-phone"></i> +27 060 440 5957</p>
+                <p><i class="fas fa-envelope"></i> zungu3270@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Durban, South Africa</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-6PM</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#" onclick="showSection('home')">Home</a>
+                <a href="#" onclick="showSection('about')">About</a>
+                <a href="#" onclick="showSection('portfolio')">Portfolio</a>
+                <a href="#" onclick="showSection('contact')">Contact</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Zungu Developer. All rights reserved. | Full-Stack Web Developer Portfolio</p>
+        </div>
+    </footer>
+
+    <!-- Quick Navigation Float -->
+    <div class="quick-nav-float">
+        <button class="quick-nav-btn" onclick="toggleQuickNav()">
+            <i class="fas fa-compass"></i>
+        </button>
+        <div class="quick-nav-menu" id="quickNavMenu">
+            <button class="quick-nav-item" onclick="showSection('home'); closeQuickNav();">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="quick-nav-item" onclick="showSection('about'); closeQuickNav();">
+                <i class="fas fa-user"></i>
+                <span>About Me</span>
+            </button>
+            <button class="quick-nav-item" onclick="showSection('skills'); closeQuickNav();">
+                <i class="fas fa-code"></i>
+                <span>Skills</span>
+            </button>
+            <div class="quick-nav-divider"></div>
+            <button class="quick-nav-item" onclick="showSection('portfolio'); closeQuickNav();">
+                <i class="fas fa-briefcase"></i>
+                <span>Portfolio</span>
+            </button>
+            <button class="quick-nav-item" onclick="showSection('services-packages'); closeQuickNav();">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Services</span>
+            </button>
+            <div class="quick-nav-divider"></div>
+            <button class="quick-nav-item" onclick="showSection('contact'); closeQuickNav();">
+                <i class="fas fa-envelope"></i>
+                <span>Contact</span>
+            </button>
+            <button class="quick-nav-item" onclick="showSection('client-portal'); closeQuickNav();">
+                <i class="fas fa-user-shield"></i>
+                <span>Client Portal</span>
+            </button>
+            <button class="quick-nav-item" onclick="window.open('https://wa.me/27604405957', '_blank'); closeQuickNav();">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/27604405957" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Toggle between service types
+        function toggleServiceType(type) {
+            // Update button states
+            document.getElementById('monthlyBtn').classList.remove('active');
+            document.getElementById('oneoffBtn').classList.remove('active');
+            
+            if (type === 'monthly') {
+                document.getElementById('monthlyBtn').classList.add('active');
+                document.getElementById('monthlyServices').classList.add('active');
+                document.getElementById('oneoffServices').classList.remove('active');
+            } else {
+                document.getElementById('oneoffBtn').classList.add('active');
+                document.getElementById('oneoffServices').classList.add('active');
+                document.getElementById('monthlyServices').classList.remove('active');
+            }
+        }
+
+        // Navigation functionality
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Close mobile menu if open
+            document.getElementById('navMenu').classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Form submissions
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Create WhatsApp message
+            const message = `New Project Inquiry:
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+Company: ${data.company || 'Not specified'}
+Service: ${data.service}
+Budget: ${data.budget || 'Not specified'}
+Details: ${data.message}`;
+            
+            const whatsappUrl = `https://wa.me/27604405957?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            alert('Thank you for your inquiry! You\'ll be redirected to WhatsApp to complete your message.');
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Demo login check
+            if (email === 'demo@client.com' && password === 'demo123') {
+                // Hide login form and show dashboard
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+                document.getElementById('forgotPasswordSection').style.display = 'none';
+            } else {
+                alert('Invalid credentials. Please use the demo login or contact support for assistance.');
+            }
+        });
+
+        // Forgot password form
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('resetEmail').value;
+            alert(`Password reset instructions have been sent to ${email}. Please check your inbox and spam folder.`);
+            showLoginForm();
+        });
+
+        // Client portal functions
+        function showForgotPassword() {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('forgotPasswordSection').style.display = 'block';
+        }
+
+        function showLoginForm() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('forgotPasswordSection').style.display = 'none';
+        }
+
+        function logout() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('forgotPasswordSection').style.display = 'none';
+            
+            // Clear form fields
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            
+            alert('You have been logged out successfully.');
+        }
+
+        // Smooth scrolling for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                const navMenu = document.getElementById('navMenu');
+                const mobileBtn = document.querySelector('.mobile-menu-btn');
+                
+                if (!navMenu.contains(e.target) && !mobileBtn.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Quick Navigation Functions
+        function toggleQuickNav() {
+            const menu = document.getElementById('quickNavMenu');
+            menu.classList.toggle('active');
+        }
+
+        function closeQuickNav() {
+            const menu = document.getElementById('quickNavMenu');
+            menu.classList.remove('active');
+        }
+
+        // Close quick nav when clicking outside
+        document.addEventListener('click', function(e) {
+            const quickNav = document.querySelector('.quick-nav-float');
+            const menu = document.getElementById('quickNavMenu');
+            
+            if (!quickNav.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // Add loading animation for form submissions
+        function showLoading(button) {
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 2000);
+        }
+
+        // Navbar hide/show on scroll
+        let lastScrollTop = 0;
+        let scrollTimeout;
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Clear existing timeout
+            clearTimeout(scrollTimeout);
+            
+            // Add a small delay to prevent flickering on fast scrolls
+            scrollTimeout = setTimeout(() => {
+                if (currentScroll > lastScrollTop && currentScroll > 100) {
+                    // Scrolling down & past 100px
+                    navbar.classList.add('hidden');
+                } else {
+                    // Scrolling up or at top
+                    navbar.classList.remove('hidden');
+                }
+                
+                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+            }, 10);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'971ac5d232dd738f',t:'MTc1NTYxODI3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
